@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- Roshan S Pai
+1001192341
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<br>
+<h2>Welcome <i>{{ uname }}</i></h2>
+<br>
+<form action="/logoutUser" method="POST">
+ <input type="Submit" value ="Logout" name ="logout">
+</form>
+<br>
+<h2>Upload an image</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+	<input type="file" name="file">
+	<br><br>
+	<button type="reset" value="Reset">Cancel</button>
+  <input type="Submit" value ="Upload" name ="Submit">
+</form>
+<br><br>
+{{contents }}
+
+<br><br>
+
+<div class="profile_3">
+  {%for item in lists%}
+    <div style="width:1200px;height:800px;" border="3">
+    <i>{{ item.owner }}</i>
+    <br/>
+    <img src="{{ item.url }}" style="width:1000px;height:500px;" border="2">
+    <br><br/>
+    {{ uname }}: <input type="text" placeholder="your comment here" name="comment" style="width:900px;"/>
+    <input type="hidden" name="commentPhoto" value="{{ item.url}}">
+    <input type="Submit" value ="Send" name ="Submit">
+    
+    </div>
+  {% endfor %}
+</div>
+
+<!--<h2>Select the file for download</h2>
+<form action="/download" method="POST">
+    <select name="filename">
+        {%for item in nlist%}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+      </select>
+<input type="submit" name="Submit" value ="Download">
+</form>
+<br><br>
+
+<h2>Select file for deletion</h2>
+<form action="/delete" method="POST">
+   <select name="filedelete">
+        {%for item in nlist%}
+          <option value="{{item}}">{{ item }}</option>
+        {% endfor %}
+   </select>
+<input type="submit" name="Submit" value ="Delete">
+</form><br><br>
+
+<h2>Create a new user</h2>
+<form action="/create" method="POST">
+  Enter username 
+  <input type="textbox" name="newuser">
+  <input type="submit" name="Submit" value ="Create">
+</form>
+-->
+</body>
+</html>
