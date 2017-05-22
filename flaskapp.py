@@ -9,14 +9,13 @@ import boto
 from passlib.hash import sha256_crypt
 from boto.s3.connection import S3Connection
 
-conn = S3Connection(aws_access_key_id='AKIAIIMYVX2YNQJYWYTQ',aws_secret_access_key='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')
+conn = S3Connection(aws_access_key_id='',aws_secret_access_key='')
 bucket_name= 'roshanassign3'
 bucket=conn.get_bucket(bucket_name,validate=True)
 app = Flask(__name__)
-app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 
 # Get the service resource.
-dynamodb = boto3.resource('dynamodb',aws_access_key_id='AKIAIIMYVX2YNQJYWYTQ',aws_secret_access_key='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',region_name='us-west-2')
+dynamodb = boto3.resource('dynamodb',aws_access_key_id='',aws_secret_access_key='',region_name='us-west-2')
 table=dynamodb.Table('users')
 photoTable = dynamodb.Table('photo')
 commentTable=dynamodb.Table('commentTable')
@@ -44,22 +43,6 @@ def logoutUser():
     session.pop('username', None)
     out=''
     return render_template("login.html", contents=out)    
-
-#create new user
-#@app.route('/create',methods=["POST"])
-#def create():
-#    newuser = request.form['newuser']
-#    ulist=[]
-#    with open('/home/ubuntu/flaskapp/authenticate.txt', 'a+') as data:
-#      for line in data:
-#          ulist.append(line.strip())
-#      if newuser.strip() in ulist:
-#          out = "User exists. Please login to continue"
-#          return render_template("login.html",contents=out)
-#      else:
-#          data.write('\n'+newuser)      
-#          out = "User created. Please login to continue"
-#          return render_template("login.html",contents=out)
 
 # login
 @app.route('/userlogin', methods=['GET','POST'])
@@ -171,22 +154,7 @@ def UploadComment():
          pdict['url']=photoURL
          pdict['owner']=owner
          plist.append(pdict)
-    return render_template("index.html",contents=out,uname=uname,lists=plist)
-
-#list all files
-#@app.route('/list',methods=['POST'])
-#def List():
-#    dlist=[]
-#    for files in bucket.get_all_keys():
-#        file_name = files.key
-#        size = files.size
-#        last_modified = files.last_modified
-#        dvar={}
-#        dvar['file_name']=file_name
-#        dvar['size']=size
-#        dvar['last_modified']=last_modified
-#        dlist.append(dvar)
-#    return render_template("list.html",lists=dlist)               
+    return render_template("index.html",contents=out,uname=uname,lists=plist)           
 
 #download a file
 @app.route('/download', methods=['GET','POST'])
